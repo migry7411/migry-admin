@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.projectmigry.migry.admin.mapper.MemberMapper">
+        
+        <sql id="columnMember">
+        	USERID,
+        	USERNAME,
+			NICKNAME,
+			PASSWORD,
+			EMAIL,
+			PHONE,
+			BIRTHDATE,
+			BIRTHTYPE,
+			SEX,
+			REGDATE ,
+			ACCEDATE,
+			ACCETIME,
+			DEL
+        </sql>
+        
+        <select id="selectMember" parameterType="com.projectmigry.migry.admin.domain.Search" resultType="com.projectmigry.migry.admin.domain.Member">
+              SELECT T.* FROM (
+	              SELECT @RNUM := @RNUM + 1 AS ROWNUM, A.* FROM (
+	              	SELECT <include refid="columnMember" /> FROM TB_MEMBER
+	              	WHERE DEL = 'N'
+	              	<if test="searchWord != null and searchWord != ''">
+	              		AND ${searchColumn} LIKE '%${searchWord}%'
+	              	</if>
+	              	ORDER BY USERID
+	              	LIMIT 18446744073709551615
+	              ) A,
+	              ( SELECT @RNUM := 0 ) R
+              ) T
+              WHERE <![CDATA[ T.ROWNUM >= #{startRow} and T.ROWNUM <= #{endRow} ]]>
+        </select>
+        
+        <select id="countMember" parameterType="com.projectmigry.migry.admin.domain.Search" resultType="int">
+        	SELECT COUNT(*) FROM TB_MEMBER
+        	WHERE DEL = 'N'
+        	<if test="searchWord != null and searchWord != ''">
+           		AND ${searchColumn} LIKE '%${searchWord}%'
+           	</if>
+        </select>
+        
+        <select id="selectMemberOne" parameterType="java.util.Map" resultType="com.projectmigry.migry.admin.domain.Member">
+              SELECT
+               	<include refid="columnMember" />
+              FROM TB_MEMBER
+              <where>
+                  <if test="userid != null and userid != ''">
+                       USERID = #{userid}
+                  </if>
+              </where>
+        </select>
+        
+        <insert id="insertMember" parameterType="com.projectmigry.migry.admin.domain.Member">
+	        INSERT INTO TB_MEMBER(
+	        	<include refid="columnMember" />
+	        )
+	        VALUES(
+	        	#{userid},
+				#{username},
+				#{nickname},
+				#{password},
+				#{email},
+				#{phone},
+				#{birthdate},
+				#{birthtype},
+				#{sex},
+				DATE_FORMAT(now(), '%Y-%m-%d'),
+				DATE_FORMAT(now(), '%Y-%m-%d'),
+				DATE_FORMAT(now(), '%H:%i:%s'),
+				'N'
+	        )
+        </insert>
+        
+        <update id="updateMember" parameterType="com.projectmigry.migry.admin.domain.Member">
+	        UPDATE TB_MEMBER SET
+	        	USERNAME = #{username},
+				NICKNAME = #{nickname},
+				EMAIL = #{email},
+				PHONE = #{phone},
+				BIRTHDATE = #{birthdate},
+				BIRTHTYPE = #{birthtype},
+				SEX = #{sex}
+			WHERE USERID = #{userid}
+        </update>
+        
+        <update id="updateMemberAccess" parameterType="String">
+	        UPDATE TB_MEMBER SET
+	        	ACCEDATE = DATE_FORMAT(now(), '%Y-%m-%d'),
+	        	ACCETIME = DATE_FORMAT(now(), '%H:%i:%s')
+			WHERE USERID = #{userid}
+        </update>
+        
+        <update id="deleteMember" parameterType="String">
+        	UPDATE TB_MEMBER SET DEL = 'Y'
+			WHERE USERID = #{userid}
+        </update>
+        
+        <select id="findMember" parameterType="java.util.Map" resultType="String">
+        	SELECT ${column} FROM TB_MEMBER
+        	WHERE DEL = 'N' AND EMAIL = #{email}
+        	<if test="column == 'USERID'">
+           		AND USERNAME = #{username}
+           	</if>
+        	<if test="column == 'PASSWORD'">
+           		AND USERID = #{userid}
+           	</if>
+        </select>
+        
+        <select id="checkMember" parameterType="java.util.Map" resultType="String">
+        	SELECT USERID FROM TB_MEMBER
+        	<where>
+	        	<if test="column == 'USERID'">
+	           		USERID = #{value}
+	           	</if>
+	        	<if test="column == 'NICKNAME'">
+	           		NICKNAME = #{value}
+	           	</if>
+	           	<if test="column == 'EMAIL'">
+	           		EMAIL = #{value}
+	           	</if>
+           	</where>
+        </select>
+
+</mapper>
+
+
+

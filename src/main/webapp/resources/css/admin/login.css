@@ -1,0 +1,56 @@
+@CHARSET "UTF-8";
+
+/* 웹폰트 */
+@font-face {
+    font-family: "Nanum";
+    src: url("../../font/NanumGothic.eot?#iefix") format("embedded-opentype"),
+    	url("../../font/NanumGothic.woff") format("woff"),
+    	url("../../font/NanumGothic.ttf") format("truetype");
+}
+@font-face {
+    font-family: "NanumEX";
+    src: url("../../font/NanumGothicExtraBold.eot?#iefix") format("embedded-opentype"),
+    	url("../../font/NanumGothicExtraBold.woff") format("woff"),
+    	url("../../font/NanumGothicExtraBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'fontello';
+  src: url('../../font/fontello.eot?46619855');
+  src: url('../../font/fontello.eot?46619855#iefix') format('embedded-opentype'),
+       url('../../font/fontello.woff?46619855') format('woff'),
+       url('../../font/fontello.ttf?46619855') format('truetype'),
+       url('../../font/fontello.svg?46619855#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 스타일 초기화 */
+* { margin:0; padding:0; }
+ul { list-style:none; }
+fieldset { border:0 none; }
+h1, h2, h3, h4, h5, h6 { font-size:1em; font-weight:normal; font-family:NanumEX; }
+input, button { font-size:1.2em; font-family:inherit; }
+label { width:50px; display:inline-block; }
+input { width:240px; display:inline-block; right:0; }
+button { width:300px; }
+
+/* 링크 스타일 */
+a:link { color:#fff; text-decoration:none; }
+a:visited { color:#fff; }
+a:hover, a:focus { color:#aaa; }
+
+/* 숨김 콘텐츠 */
+.hidden, legend { display:none; }
+
+body {
+	font-family:Nanum;
+	color:#fff;
+	line-height:1;
+	font-size:1.2em;
+	background: #000; 
+}
+
+
+#wrapper { background:transparent; }
+
+#body_wrapper { width:300px; margin:0 auto; margin-top: 100px; }
