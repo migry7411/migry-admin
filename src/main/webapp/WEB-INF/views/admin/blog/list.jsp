@@ -21,7 +21,7 @@ function openImage(width, height, fileName, id) {
 	var src = "";
 	
 	if(fileName == "noimage.png") {
-		src = "/resources/images/" + filename;
+		src = "/resources/images/" + fileName;
 	} else {
 		src = "${pageContext.request.contextPath}/admin/blog/getImage.do?id=" + id;
 	}

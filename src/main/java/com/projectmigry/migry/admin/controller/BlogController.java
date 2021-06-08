@@ -110,7 +110,7 @@ public class BlogController {
 	        } else if (!loginMember.getUserid().equals("administrator")) {
 	        	return "redirect:/common/login.do?flag=A";
 	        } else {
-	        	String path = request.getSession().getServletContext().getRealPath(FileService.blogSavePath);
+	        	String path = FileService.blogSavePath;
 	        	MultipartFile uploadfile = dto.getUploadFile();
 	        	
 	        	if (uploadfile != null) {
@@ -147,7 +147,7 @@ public class BlogController {
 				String fileName = blog.getFileName();
 				
 				if(fileName != null && !fileName.equals("")) {
-	        		String path = request.getSession().getServletContext().getRealPath(FileService.blogSavePath);
+	        		String path = FileService.blogSavePath;
         			FileService.deleteFile(path, fileName);
         		}
 				
