@@ -95,6 +95,13 @@ public class AdminController {
         JsonUtil.parseJSON(map, response);
     }
 	
+	@RequestMapping("/admin/logout.do")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "redirect:/admin/loginPage.do";
+	}
+	
 	@RequestMapping("/")
 	public String home() {
 		return "redirect:/admin/loginPage.do";

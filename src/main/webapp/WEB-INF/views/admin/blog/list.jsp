@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
@@ -64,9 +65,9 @@ function openImage(width, height, fileName, id) {
 	<c:forEach var="row" items="${list}">
 	<div class="list">
 		<ul>
-			<li>${row.title}</li>
+			<li>${fn:replace(fn:replace(fn:replace(row.title, '<', '&lt;'), '>', '&gt;'), '&', '&amp;')}</li>
 			<li>${row.rgstDt}</li>
-			<li>${row.content}</li>
+			<li>${fn:replace(fn:replace(fn:replace(row.content, '<', '&lt;'), '>', '&gt;'), '&', '&amp;')}</li>
 			<li><a href="javascript:openImage(${row.width}, ${row.height}, '${row.fileName}', ${row.id})">&nbsp;${row.oriFileName}</a></li>
 			<li><button type="button" onclick="deleteBlog(${row.id})"><spring:message code="contents.common.delete" /></button></li>
 		</ul>

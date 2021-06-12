@@ -30,7 +30,9 @@
 					<li><a href="<%= root %>/admin/board/listBoard.do">개시판 관리</a></li>
 					<li><a href="<%= root %>/admin/cover/listCover.do">커버스토리 관리</a></li>
 					<li><a href="<%= root %>/admin/blog/listBlog.do">블로그 관리</a></li>
+					<li><a href="<%= root %>/admin/project/listProject.do">프로젝트 관리</a></li>
 					<li><a href="<%= root %>/admin/stats/statistics.do">통계</a></li>
+					<li><a href="<%= root %>/admin/logout.do">로그아웃</a></li>
 				</ul>
 			</nav>
 			<section id="contents">

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
@@ -46,9 +47,9 @@ function deleteCover(id) {
 	<c:forEach var="row" items="${list}">
 	<div class="list">
 		<ul>
-			<li>${row.subject}</li>
+			<li>${fn:replace(fn:replace(fn:replace(row.subject, '<', '&lt;'), '>', '&gt;'), '&', '&amp;')}</li>
 			<li>${row.regdate}</li>
-			<li>${row.contents}</li>
+			<li>${fn:replace(fn:replace(fn:replace(row.contents, '<', '&lt;'), '>', '&gt;'), '&', '&amp;')}</li>
 			<li><button type="button" onclick="deleteCover(${row.id})"><spring:message code="contents.common.delete" /></button></li>
 		</ul>
 	</div>
