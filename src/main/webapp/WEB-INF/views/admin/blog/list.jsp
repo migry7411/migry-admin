@@ -27,7 +27,7 @@ function openImage(width, height, fileName, id) {
 		src = "${pageContext.request.contextPath}/admin/blog/getImage.do?id=" + id;
 	}
 	
-	var html = "<div class='img'><a href='javascript:closeModal()'><img src='" + src + "' border='0' /></a></div>";
+	var html = "<div class='img'><a href='javascript:closeModal()'><img src='" + src + "' border='0' width='" + width + "px' height='" + height + "px' /></a></div>";
 	$("#modal").html(html);
 }
 //-->

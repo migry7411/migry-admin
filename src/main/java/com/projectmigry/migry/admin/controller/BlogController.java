@@ -79,8 +79,19 @@ public class BlogController {
     					}
     					
     					Image img = new ImageIcon(path + "/" + fileName).getImage();
-    					blog.setWidth(img.getWidth(null)); 		//가로 사이즈
-    					blog.setHeight(img.getHeight(null));		//세로 사이즈
+    					int width = img.getWidth(null);			//가로 사이즈
+    					int height = img.getHeight(null);		//세로 사이즈
+    					
+    					blog.setWidth(width);
+    					blog.setHeight(height);
+    					
+    					if(width > 250) {
+    						double ratio = (double)width / 250;
+    						int resizeHeight = (int)(height / ratio);
+    						
+    						blog.setWidth(250);
+        					blog.setHeight(resizeHeight);
+    					}
     					
     					list.set(i, blog);
     				}
